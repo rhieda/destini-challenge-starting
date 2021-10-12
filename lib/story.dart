@@ -8,4 +8,10 @@ class Story {
     this._choice1 = choice1;
     this._choice2 = choice2;
   }
+
+  String getTitle() => _storyTitle;
+
+  String getChoice1() => _choice1;
+
+  String getChoice2() => _choice2;
 }
