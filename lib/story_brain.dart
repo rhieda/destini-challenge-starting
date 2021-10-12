@@ -33,62 +33,63 @@ class StoryBrain {
         choice2: '')
   ];
 
-  int storyNumber = 0;
+  int _storyNumber = 0;
 
   Story _getFirstStory() => _storyData.first;
 
+  Story _getCurrentStory() => _storyData[_storyNumber];
+
   String getStory() {
-    return _getFirstStory().getTitle();
+    return _getCurrentStory().getTitle();
   }
 
-  String getChoice1() => _getFirstStory().getChoice1();
+  String getChoice1() => _getCurrentStory().getChoice1();
 
-  String getChoice2() => _getFirstStory().getChoice2();
+  String getChoice2() => _getCurrentStory().getChoice2();
 
   void nextStory({int choiceNumber}) {
-    if (storyNumber == 0) {
+    if (_storyNumber == 0) {
       _setStoryNumber(
         choiceNumber: choiceNumber,
         setLeft: 1,
         setRight: 2,
       );
-    } else if (storyNumber == 1) {
+    } else if (_storyNumber == 1) {
       _setStoryNumber(
         choiceNumber: choiceNumber,
         setLeft: 2,
         setRight: 3,
       );
-    } else if (storyNumber == 2) {
+    } else if (_storyNumber == 2) {
       _setStoryNumber(
         choiceNumber: choiceNumber,
         setLeft: 5,
         setRight: 4,
       );
-    } else if (storyNumber == 3) {
+    } else if (_storyNumber == 3) {
       _restart();
-    } else if (storyNumber == 4) {
+    } else if (_storyNumber == 4) {
       _restart();
-    } else if (storyNumber == 5) {
+    } else if (_storyNumber == 5) {
       _restart();
     }
   }
 
   void _setStoryNumber({int choiceNumber, int setLeft, int setRight}) {
+    print('current choiceNumber $choiceNumber');
+    print('current storyNumber $_storyNumber');
     if (choiceNumber == 1) {
-      storyNumber = setLeft;
+      _storyNumber = setLeft;
     } else if (choiceNumber == 2) {
-      storyNumber = setRight;
+      _storyNumber = setRight;
     } else {
       print('Invalid route for $choiceNumber');
     }
   }
 
-  void _restart() {}
+  void _restart() {
+    _storyNumber = 0;
+  }
 }
-//TODO: Step 23 - Use the storyNumber property inside getStory(), getChoice1() and getChoice2() so that it gets the updated story and choices rather than always just the first (0th) one.
-
-//TODO: Step 25 - Change the storyNumber property into a private property so that only story_brain.dart has access to it. You can do this by right clicking on the name (storyNumber) and selecting Refactor -> Rename to make the change across all the places where it's used.
-
-//TODO: Step 17 - Create a method called nextStory(), it should not have any outputs but it should have 1 input called choiceNumber which will be the choice number (int) made by the user.
 
 //TODO: Step 27 - Create a method called buttonShouldBeVisible() which checks to see if storyNumber is 0 or 1 or 2 (when both buttons should show choices) and return true if that is the case, else it should return false.
